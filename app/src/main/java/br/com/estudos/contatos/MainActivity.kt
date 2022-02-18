@@ -25,18 +25,12 @@ class MainActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
         val toolbar = binding.toolbar
-
-        gerandoListaDeContatos()
         setToolbar(toolbar, "Lista de contatos")
         setupRecyclerView()
         setupOnClicks()
     }
 
-    private fun gerandoListaDeContatos() {
-        ContatoSingleton.lista.add(ContatosVO(1, "Beatriz", "(11)99201-7770"))
-        ContatoSingleton.lista.add(ContatosVO(2, "Laura", "(11)99302-6661"))
-        ContatoSingleton.lista.add(ContatosVO(3, "Beatriz", "(11)99423-5552"))
-    }
+
 
     private fun setupOnClicks() {
         binding.fab.setOnClickListener { onClickAdd() }
@@ -71,8 +65,7 @@ class MainActivity : BaseActivity() {
 
     private fun setupRecyclerView() {
        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ContatoAdapter(this, ContatoSingleton.lista) {onClickItemRecyclerView(it)}
-        binding.recyclerView.adapter = adapter
+        onClickBuscar()
     }
 
     override fun onResume() {

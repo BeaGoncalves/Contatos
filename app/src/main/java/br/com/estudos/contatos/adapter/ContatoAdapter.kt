@@ -24,7 +24,7 @@ class ContatoAdapter(
         with(holder.binding){
             textNome.text = contato.nome
             textNumero.text = contato.telefone
-            llItem.setOnClickListener { onClick(position) }
+            llItem.setOnClickListener { onClick(contato.id) }
         }
     }
 

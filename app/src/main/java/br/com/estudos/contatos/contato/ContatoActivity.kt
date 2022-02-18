@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import br.com.estudos.contatos.R
+import br.com.estudos.contatos.application.ContatoApplication
 import br.com.estudos.contatos.bases.BaseActivity
 import br.com.estudos.contatos.databinding.ActivityContatoBinding
 import br.com.estudos.contatos.model.ContatosVO
@@ -36,9 +37,9 @@ class ContatoActivity : BaseActivity() {
             telefone
         )
         if (idContato == -1) {
-            ContatoSingleton.lista.add(contato)
+            ContatoApplication.instance.helperDB?.salvarContato(contato)
         } else {
-            ContatoSingleton.lista.set(idContato, contato)
+            //ContatoSingleton.lista.set(idContato, contato)
         }
         finish()
     }
@@ -57,7 +58,9 @@ class ContatoActivity : BaseActivity() {
             binding.btnExcluirContato.visibility = View.GONE
             return
         }
-        binding.etNome.setText(ContatoSingleton.lista[idContato].nome)
-        binding.etTelefone.setText(ContatoSingleton.lista[idContato].telefone)
+        var lista = ContatoApplication.instance.helperDB?.bucaContato("$idContato", true) ?: return
+        var contato = lista.getOrNull(0) ?: return
+        binding.etNome.setText(contato.nome)
+        binding.etTelefone.setText(contato.telefone)
     }
 }

@@ -8,7 +8,7 @@ import br.com.estudos.contatos.model.ContatosVO
 class ContatoApplication : Application() {
 
     companion object {
-        lateinit var  instance : ContatoApplication
+        lateinit var instance : ContatoApplication
     }
 
     var helperDB:HelperDB? = null
@@ -16,6 +16,7 @@ class ContatoApplication : Application() {
 
     override fun onCreate() {
         helperDB = HelperDB(this)
+        instance = this
         super.onCreate()
     }
 
