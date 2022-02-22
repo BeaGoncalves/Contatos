@@ -15,9 +15,9 @@ class ContatoApplication : Application() {
         private set
 
     override fun onCreate() {
+        super.onCreate()
         helperDB = HelperDB(this)
         instance = this
-        super.onCreate()
     }
 
 

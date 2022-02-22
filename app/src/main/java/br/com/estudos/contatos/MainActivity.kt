@@ -26,6 +26,7 @@ class MainActivity : BaseActivity() {
         setContentView(view)
         val toolbar = binding.toolbar
         setToolbar(toolbar, "Lista de contatos")
+
         setupRecyclerView()
         setupOnClicks()
     }
@@ -45,8 +46,6 @@ class MainActivity : BaseActivity() {
         } catch (e : Exception) {
             e.printStackTrace()
         }
-
-
         adapter = ContatoAdapter(this, listaFiltrada) {onClickItemRecyclerView(it)}
         binding.recyclerView.adapter = adapter
         Toast.makeText(this, "Buscando por $busca", Toast.LENGTH_SHORT).show()
@@ -65,12 +64,11 @@ class MainActivity : BaseActivity() {
 
     private fun setupRecyclerView() {
        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        onClickBuscar()
     }
 
     override fun onResume() {
         super.onResume()
-        adapter?.notifyDataSetChanged()
+        onClickBuscar()
     }
 
 }

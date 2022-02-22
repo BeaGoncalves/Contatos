@@ -28,7 +28,6 @@ class ContatoActivity : BaseActivity() {
     }
 
     private fun onClickSalvarContato(){
-
         val telefone = binding.etTelefone.text.toString()
         val nome = binding.etNome.text.toString()
         val contato = ContatosVO(
@@ -39,14 +38,14 @@ class ContatoActivity : BaseActivity() {
         if (idContato == -1) {
             ContatoApplication.instance.helperDB?.salvarContato(contato)
         } else {
-            //ContatoSingleton.lista.set(idContato, contato)
+            ContatoApplication.instance.helperDB?.atualizarContato(contato)
         }
         finish()
     }
 
     fun onClickExcluirContato(view: View){
      if (idContato > -1){
-         ContatoSingleton.lista.removeAt(idContato)
+         ContatoApplication.instance.helperDB?.excluirContato(idContato)
          finish()
      }
 
